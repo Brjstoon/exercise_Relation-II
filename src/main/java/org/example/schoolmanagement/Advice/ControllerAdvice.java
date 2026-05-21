@@ -3,6 +3,7 @@ package org.example.schoolmanagement.Advice;
 
 import org.example.schoolmanagement.Api.ApiException;
 import org.example.schoolmanagement.Api.ApiResponse;
+import org.hibernate.NonUniqueObjectException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.Errors;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.net.ConnectException;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestControllerAdvice
@@ -59,10 +61,20 @@ public class ControllerAdvice {
     public ResponseEntity<ApiResponse> MethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         String message = e.getMessage();
         return ResponseEntity.status(400).body(new ApiResponse(message));
+    }
 
+    @ExceptionHandler(NonUniqueObjectException.class)
+    public ResponseEntity<ApiResponse> NonUniqueObjectException(NonUniqueObjectException e) {
+        String message = e.getMessage();
+        return ResponseEntity.status(400).body(new ApiResponse(message));
     }
 
 
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<ApiResponse> SQLException(SQLException e) {
+        String message = e.getMessage();
+        return ResponseEntity.status(400).body(new ApiResponse(message));
+    }
 
 
 }

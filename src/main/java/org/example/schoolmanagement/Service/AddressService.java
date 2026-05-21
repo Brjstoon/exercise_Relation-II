@@ -69,6 +69,7 @@ public class AddressService {
 
     public AddressDTOut convertToDTO(Address address){
         AddressDTOut addressDTOut = new AddressDTOut();
+        addressDTOut.setId(address.getId());
         addressDTOut.setArea(address.getArea());
         addressDTOut.setStreet(addressDTOut.getStreet());
         addressDTOut.setBuildingNumber(addressDTOut.getBuildingNumber());

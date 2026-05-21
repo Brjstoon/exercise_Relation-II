@@ -65,6 +65,7 @@ public class TeacherService {
     public TeacherDTOut convertToDTO(Teacher teacher) {
         AddressDTOut addressDTOut = new AddressDTOut();
         if (teacher.getAddress() != null) {
+            addressDTOut.setId(teacher.getAddress().getId());
             addressDTOut.setArea(teacher.getAddress().getArea());
             addressDTOut.setStreet(teacher.getAddress().getStreet());
             addressDTOut.setBuildingNumber(teacher.getAddress().getBuildingNumber());
