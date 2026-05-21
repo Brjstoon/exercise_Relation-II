@@ -3,6 +3,7 @@ package org.example.schoolmanagement.Controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.schoolmanagement.Api.ApiResponse;
+import org.example.schoolmanagement.DTO.IN.AddressDTOIN;
 import org.example.schoolmanagement.Model.Address;
 import org.example.schoolmanagement.Service.AddressService;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,15 @@ public class AddressController {
         return ResponseEntity.status(200).body(addressService.getAll());
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addAddress(@RequestBody @Valid Address address) {
-        addressService.addAddress(address);
+    @PostMapping("/add/{teacher_id}")
+    public ResponseEntity<?> addAddress(@PathVariable Integer teacher_id, @RequestBody @Valid AddressDTOIN addressDTOIN) {
+        addressService.addAddress(teacher_id, addressDTOIN);
         return ResponseEntity.status(200).body(new ApiResponse("address added successfully"));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateAddress(@PathVariable Integer id, @RequestBody @Valid Address address) {
-        addressService.updateAddress(id, address);
+    public ResponseEntity<?> updateAddress(@PathVariable Integer id, @RequestBody @Valid AddressDTOIN addressDTOIN) {
+        addressService.updateAddress(id, addressDTOIN);
         return ResponseEntity.status(200).body(new ApiResponse("address updated successfully"));
     }
 
